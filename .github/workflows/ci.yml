@@ -15,14 +15,17 @@ jobs:
       - name: Checkout do código
         uses: actions/checkout@v5
 
-      - name: Instalar uv
+      - name: Install uv
         uses: astral-sh/setup-uv@v5
         with:
-          python-version: "3.14"
+          python-version: "3.12"
           enable-cache: true
 
-      - name: Instalar dependências
+      - name: Install dependencies
         run: uv sync --frozen --all-groups
 
-      - name: Executar testes
+      - name: Check formatting and lint
+        run: uv run ruff format --check . && uv run ruff check .
+
+      - name: Run tests
         run: uv run pytest

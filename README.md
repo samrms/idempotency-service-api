@@ -1,10 +1,20 @@
-# idenpotency-api
+# Idempotency Service API
 
-this is a symple idempotency api make with python
+PostgreSQL-backed API for safely retrying operations with idempotency keys.
 
-## stack
+## Quick Start
 
-- python
-- sqlalchemy
-- postgresql
-- fastapi
+```bash
+cp .env.example .env
+uv sync
+uv run alembic upgrade head
+uv run uvicorn src.main:app --reload
+```
+
+## Docs
+
+No additional documentation is currently available.
+
+## License
+
+MIT
