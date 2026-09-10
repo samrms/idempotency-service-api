@@ -19,6 +19,13 @@ uv run uvicorn src.main:app --reload
 - [Development](./docs/development.md) — Local setup, tests, and environment variables.
 - [Deployment](./docs/deployment.md) — Docker Compose and deployment notes.
 
+## Render
+
+1. Connect the repository to Render and use `render.yaml`.
+2. Set `ALLOWED_HOSTS` and `BACKEND_CORS_ORIGINS` in Render without committing their values.
+3. Use `main` as the production branch and keep automatic deploys enabled.
+4. Push to `main` to build, migrate, and deploy the API.
+
 ## License
 
 MIT
