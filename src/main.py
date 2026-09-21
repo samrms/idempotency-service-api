@@ -5,6 +5,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 
 from src.config.settings import get_settings
+from src.infrastructure.database.models import Base
+from src.infrastructure.database.session import engine
 from src.presentation.routes import router
 
 settings = get_settings()
@@ -20,3 +22,9 @@ app.add_middleware(
 if settings.allowed_hosts_list != ["*"]:
     app.add_middleware(TrustedHostMiddleware, allowed_hosts=settings.allowed_hosts_list)
 app.include_router(router)
+
+
+@app.on_event("startup")
+def _create_tables() -> None:
+    if settings.database_url == "sqlite://":
+        Base.metadata.create_all(bind=engine)
