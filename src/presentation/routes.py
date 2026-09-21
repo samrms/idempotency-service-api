@@ -10,7 +10,7 @@ from src.infrastructure.repositories import (
     SqlAlchemyIdempotencyRepository,
     SqlAlchemyOperationRepository,
 )
-from src.presentation.schemas import OperationCreateRequest, OperationResponse
+from src.presentation.schemas import HealthResponse, OperationCreateRequest, OperationResponse
 
 router = APIRouter()
 
@@ -22,9 +22,9 @@ def get_create_service(db: Session = Depends(get_db)) -> CreateOperationService:
     )
 
 
-@router.get("/health")
-def health() -> dict[str, str]:
-    return {"status": "ok"}
+@router.get("/health", response_model=HealthResponse)
+def health() -> HealthResponse:
+    return HealthResponse(status="ok")
 
 
 @router.post("/operations", response_model=OperationResponse, status_code=status.HTTP_201_CREATED)
