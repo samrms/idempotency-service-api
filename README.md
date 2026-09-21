@@ -7,8 +7,8 @@ PostgreSQL-backed API for safely retrying operations with idempotency keys.
 ```bash
 cp .env.example .env
 uv sync
-uv run alembic upgrade head
-uv run uvicorn src.main:app --reload
+uv run python -m alembic upgrade head
+uv run python -m uvicorn src.main:app --reload
 ```
 
 ## Docs

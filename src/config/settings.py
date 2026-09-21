@@ -4,7 +4,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    database_url: str = "sqlite:///./idempotency.db"
+    database_url: str = "sqlite://"
     app_env: str = "development"
     log_level: str = "INFO"
     allowed_hosts: str = "*"
