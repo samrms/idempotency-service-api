@@ -12,4 +12,4 @@ RUN uv sync --frozen --no-dev
 RUN useradd --create-home appuser && chown -R appuser /app
 USER appuser
 EXPOSE 8000
-CMD ["sh", "-c", "uv run uvicorn src.main:app --host 0.0.0.0 --port ${PORT:-8000}"]
+CMD ["sh", "-c", "uv run python -m uvicorn src.main:app --host 0.0.0.0 --port ${PORT:-8000}"]
