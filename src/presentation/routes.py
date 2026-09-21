@@ -1,9 +1,8 @@
 from uuid import UUID
 
 from fastapi import APIRouter, Depends, Header, HTTPException, status
-from sqlalchemy.orm import Session
-
 from sqlalchemy import text
+from sqlalchemy.orm import Session
 
 from src.application.errors import ConflictError, NotFoundError
 from src.application.services import CreateOperationService
