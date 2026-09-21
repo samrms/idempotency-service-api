@@ -11,8 +11,11 @@ jobs:
     name: Test
     runs-on: ubuntu-latest
 
+    env:
+      DATABASE_URL: "sqlite://"
+
     steps:
-      - name: Checkout do código
+      - name: Checkout
         uses: actions/checkout@v5
 
       - name: Install uv
@@ -24,8 +27,8 @@ jobs:
       - name: Install dependencies
         run: uv sync --frozen --all-groups
 
-      - name: Check formatting and lint
+      - name: Lint
         run: uv run ruff format --check . && uv run ruff check .
 
-      - name: Run tests
-        run: uv run pytest
+      - name: Test
+        run: uv run python -m pytest -v
