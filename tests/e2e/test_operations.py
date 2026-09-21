@@ -46,6 +46,6 @@ def test_get_operation_and_health(client):
     )
     operation = client.get(f"/operations/{created.json()['id']}")
 
-    assert client.get("/health").json() == {"status": "ok"}
+    assert client.get("/health").json() == {"status": "ok", "database": "ok"}
     assert operation.status_code == 200
     assert operation.json() == created.json()

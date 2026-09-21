@@ -6,6 +6,7 @@ from pydantic import BaseModel, ConfigDict, Field
 
 class HealthResponse(BaseModel):
     status: str
+    database: str
 
 
 class OperationCreateRequest(BaseModel):

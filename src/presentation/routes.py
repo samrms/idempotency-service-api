@@ -3,6 +3,8 @@ from uuid import UUID
 from fastapi import APIRouter, Depends, Header, HTTPException, status
 from sqlalchemy.orm import Session
 
+from sqlalchemy import text
+
 from src.application.errors import ConflictError, NotFoundError
 from src.application.services import CreateOperationService
 from src.infrastructure.database.session import get_db
@@ -23,8 +25,13 @@ def get_create_service(db: Session = Depends(get_db)) -> CreateOperationService:
 
 
 @router.get("/health", response_model=HealthResponse)
-def health() -> HealthResponse:
-    return HealthResponse(status="ok")
+def health(db: Session = Depends(get_db)) -> HealthResponse:
+    try:
+        db.execute(text("SELECT 1"))
+        db_status = "ok"
+    except Exception:
+        db_status = "error"
+    return HealthResponse(status="ok", database=db_status)
 
 
 @router.post("/operations", response_model=OperationResponse, status_code=status.HTTP_201_CREATED)
