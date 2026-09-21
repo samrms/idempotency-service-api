@@ -3,7 +3,6 @@ services:
     name: idempotency-service-api
     runtime: docker
     branch: main
-    autoDeploy: true
     autoDeployTrigger: checksPass
     dockerfilePath: ./Dockerfile
     dockerContext: .
